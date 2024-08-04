@@ -23,7 +23,7 @@ typedef struct
 #define pp_fsys 0x021c7270
 #define p_sys 0x021c6118
 
-#define pause_flag (*((u32 *)(p_base + 0x22AAC)))   // フィールドでの操作を無効にする
+#define pause_flag (*((u32 *)(p_base + 0x22AAC)))   // Disable operations in the field
 
 #define fp_malloc 0x02017099
 #define fp_free 0x02016fdd

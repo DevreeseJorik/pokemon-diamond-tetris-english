@@ -1,5 +1,5 @@
 MEMORY {
-    RAM : ORIGIN = 0x02290008, LENGTH = 2k
+    RAM : ORIGIN = 0x023A0008, LENGTH = 2k
 }
 SECTIONS {
     .text : {

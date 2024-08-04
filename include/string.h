@@ -1,6 +1,6 @@
 /**
  * @file string.h
- * @brief 文字列関連
+ * @brief String-related functions
  *
  */
 #if !defined(_STRING_H)
@@ -15,7 +15,7 @@ typedef struct
     charcode buffer[1];
 } String;
 
-#define HEAP_UNUSED 2 // 未使用ヒープのID
+#define HEAP_UNUSED 2 // ID for unused heap
 #define _nweString ((String * (*)(u32, u32))0x02023131)
 #define _deleteString ((void (*)(String *))0x02023105)
 
@@ -39,11 +39,11 @@ enum
     CHAR_D,
     CHAR_E,
     CHAR_F,
-    CHAR_CR = 0xe000, // 改行
-    CHAR_EOM = 0xffff,
+    CHAR_CR = 0xe000, // Carriage return (newline)
+    CHAR_EOM = 0xffff, // End of message
 };
 
-// プロトタイプ宣言
+// Function prototypes
 static inline String *newString(u32 length);
 static inline void deleteString(String *str);
 static inline void u8toStrcode(u8 num, charcode *chars);
@@ -52,9 +52,9 @@ static inline String *NumsToString(const u8 nums[], u32 size);
 static inline String *NumsToStringWithSpace(const u8 nums[], u32 size);
 
 /**
- * @brief 文字列を生成する
- * @param length 最大文字数
- * @return 生成された文字列のポインタ
+ * @brief Create a new string
+ * @param length Maximum number of characters
+ * @return Pointer to the created string
  */
 static inline String *newString(u32 length)
 {
@@ -62,8 +62,8 @@ static inline String *newString(u32 length)
 }
 
 /**
- * @brief 文字列を削除する
- * @param str 削除する文字列のポインタ
+ * @brief Delete a string
+ * @param str Pointer to the string to be deleted
  */
 static inline void deleteString(String *str)
 {
@@ -71,10 +71,10 @@ static inline void deleteString(String *str)
 }
 
 /**
- * @brief u8の数値を16進数で表したcharcodeに変換する
+ * @brief Convert an u8 value to a hexadecimal charcode representation
  *
- * @param num 変換する数値
- * @param chars 変換された文字列を受け取るバッファ(2文字分)
+ * @param num Value to be converted
+ * @param chars Buffer to receive the converted string (2 characters)
  */
 static inline void u8toStrcode(u8 num, charcode *chars)
 {
@@ -85,10 +85,10 @@ static inline void u8toStrcode(u8 num, charcode *chars)
 }
 
 /**
- * @brief u32の数値を16進数で表したcharcodeに変換する
+ * @brief Convert a u32 value to a hexadecimal charcode representation
  *
- * @param num 変換する数値
- * @param chars 変換された文字列を受け取るバッファ(8文字分)
+ * @param num Value to be converted
+ * @param chars Buffer to receive the converted string (8 characters)
  */
 static inline void u32toStrcode(u32 num, charcode *chars)
 {
@@ -100,12 +100,12 @@ static inline void u32toStrcode(u32 num, charcode *chars)
 }
 
 /**
- * @brief メモリ領域を16進数の文字列に変換
+ * @brief Convert a memory area to a hexadecimal string
  *
- * @param nums 変換するメモリ領域の先頭
- * @param str 変換した数値を格納する文字列
- * @param size 変換するメモリ領域のサイズ (バイト)
- * @details 文字数のチェックは行わないので注意
+ * @param nums Pointer to the start of the memory area
+ * @param size Size of the memory area (in bytes)
+ * @return Pointer to the resulting string
+ * @details No checks are performed on the number of characters
  */
 static inline String *NumsToString(const u8 nums[], u32 size)
 {
@@ -119,12 +119,12 @@ static inline String *NumsToString(const u8 nums[], u32 size)
 }
 
 /**
- * @brief メモリ領域を16進数の文字列に変換（空白入）
+ * @brief Convert a memory area to a hexadecimal string with spaces
  *
- * @param nums 変換するメモリ領域の先頭
- * @param str 変換した数値を格納する文字列
- * @param size 変換するメモリ領域のサイズ (バイト)
- * @details 文字数のチェックは行わないので注意
+ * @param nums Pointer to the start of the memory area
+ * @param size Size of the memory area (in bytes)
+ * @return Pointer to the resulting string
+ * @details No checks are performed on the number of characters
  */
 static inline String *NumsToStringWithSpace(const u8 nums[], u32 size)
 {

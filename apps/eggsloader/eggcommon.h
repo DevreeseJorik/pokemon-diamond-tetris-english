@@ -14,16 +14,15 @@
 #define EGG_DATA_SIZE (EGG_DATA1_SIZE+EGG_DATA2_SIZE)
 #define EGG_DATA1_OFFSET 0x4
 #define EGG_DATA2_OFFSET 0x28
-#define EGG_DATA_SIZE (EGG_DATA1_SIZE+EGG_DATA2_SIZE)
 
 typedef u8 data80[0x80];
-// タマゴ１つに保存できるデータ
+// Data that can be stored in one egg
 typedef u8 data74[0x74];
 typedef struct
 {
-    u8 eggNum; // 展開したいタマゴの個数
+    u8 eggNum; // Number of eggs to unpack
     u8 dummy[2];
-    u8 isAutoRun; // 展開と同時に実行する(1), 展開のみする(0)
+    u8 isAutoRun; // Execute immediately upon unpacking (1), only unpack (0)
     u16 isEncrypted0 : 1;
     u16 isEncrypted1 : 1;
     u16 isBadEgg : 1;

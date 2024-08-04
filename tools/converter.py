@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
 
 usage = '''
-バイナリファイルをPARコード等に変換します。
-オプション:
-  -i                入力するバイナリファイルのパス
-  -o                出力するファイルのパス
-  -a                バイナリを配置するアドレス（--pointerオプションを付ける場合アドレスオフセット）
-  -p                参照するポインターのアドレス
-  --mode=par        バイナリを書き込むPARコードを出力
-  --mode=parFlat    バイナリを書き込むPARコードを出力（desmume用）
-  --mode=word       バイナリをワード(4byte)に切り分けて出力（16進法）
-  --mode=wordDec    バイナリをワード(4byte)に切り分けて出力（10進法）
-  --mode=script     バイナリをメモリに書き込むゲーム内スクリプト(..0007)を出力（16進法）
-  --mode=scriptDec  バイナリをメモリに書き込むゲーム内スクリプト(..0007)を出力（10進法）
-  --mode=csv        未実装
-  --nozero          書き込む値が0の場合は無視する
-  --pointer         PARでポインタコードを出力する
+Convert binary files to PAR codes or other formats.
+Options:
+  -i                Path to the input binary file
+  -o                Path to the output file
+  -a                Address to place the binary (Address offset if using the --pointer option)
+  -p                Address of the reference pointer
+  --mode=par        Output PAR codes to write the binary
+  --mode=parFlat    Output PAR codes to write the binary (for desmume)
+  --mode=word       Split the binary into words (4 bytes) and output in hexadecimal
+  --mode=wordDec    Split the binary into words (4 bytes) and output in decimal
+  --mode=script     Output game script to write the binary into memory (hexadecimal)
+  --mode=scriptDec  Output game script to write the binary into memory (decimal)
+  --mode=csv        Not implemented
+  --nozero          Ignore values that are 0
+  --pointer         Output pointer codes for PAR
+
 '''
 
 from bin2par import *

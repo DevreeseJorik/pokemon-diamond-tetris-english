@@ -1,9 +1,8 @@
 /**
  * @file memory_viewer.c
- * @brief eggloader用テトリスプログラム
+ * @brief Tetris program for eggsloader
  *
- * @details テトリス本体のロジックは https://github.com/taylorconor/tinytetris
- * を改変して使用しています。
+ * @details The core logic of Tetris is modified from https://github.com/taylorconor/tinytetris
  */
 
 #include "acehelper.h"
@@ -28,8 +27,8 @@ enum
     GAMEOVER,
 };
 
-// テトリス本体用の定数
-// block layout is: {w-1,h-1}{x0,y0}{x1,y1}{x2,y2}{x3,y3} (two bits each)
+// Constants for the Tetris core
+// Block layout is: {w-1,h-1}{x0,y0}{x1,y1}{x2,y2}{x3,y3} (two bits each)
 const u32 X = 431424, Y = 598356, R = 427089, PX = 247872, PY = 799248, PR,
           C = 348480, P = 615696;
 const u32 block[7][4] = {{X, Y, X, Y},
@@ -40,7 +39,7 @@ const u32 block[7][4] = {{X, Y, X, Y},
                          {PX, PY, PX, PY},
                          {614928, 399424, 615744, 428369}};
 
-// グローバル変数
+// Global variables
 int state;
 Window *win;
 String *str;
@@ -50,7 +49,7 @@ u8 x, y, r, px, py, pr, p, tick;
 u32 c, score;
 u8 board[20][10];
 
-// プロトタイプ宣言
+// Function prototypes
 void job_func();
 inline static void init();
 inline static void init_tetris();
@@ -71,7 +70,7 @@ void job_func()
     switch (state)
     {
     case WAIT:
-        // Lボタンが押されていたら開始
+        // Start if L button is pressed
         if (pad_state_keydown & pad_keyL)
         {
             init();
@@ -81,7 +80,7 @@ void job_func()
         break;
 
     case PLAYING:
-        // Lボタンが押されていたら終了
+        // End if L button is pressed
         if (pad_state_keydown & pad_keyL)
         {
             terminate();
@@ -100,13 +99,13 @@ void job_func()
         break;
 
     case GAMEOVER:
-        // Lボタンが押されたら終了
+        // End if L button is pressed
         if (pad_state_keydown & pad_keyL)
         {
             terminate();
             return;
         }
-        // Aボタンが押されたらリスタート
+        // Restart if A button is pressed
         if (pad_state_keydown & pad_keyA)
         {
             init_tetris();
@@ -146,7 +145,7 @@ inline static void terminate()
 
 inline static void draw()
 {
-    // ブロックの描画
+    // Draw blocks
     for (u32 i = 0; i < 20; i++)
     {
         for (u32 j = 0; j < 10; j++)
@@ -155,18 +154,18 @@ inline static void draw()
             {
                 u16 px = BOX_MARGIN + GRID_SIZE * j;
                 u16 py = BOX_MARGIN + GRID_SIZE * i;
-                // TEST 矩形領域の塗りつぶし
+                // TEST Fill rectangle area
                 fillWindowArea(win, board[i][j], px, py, BOX_SIZE, BOX_SIZE);
             }
         }
     }
 
-    // スコアの描画
+    // Draw score
     // u32toStrcode(score, str->buffer);
-    // printStr(win, str);
+    // printStr(win, str)
 }
 
-// extract a 2-bit number from a block entry
+// Extract a 2-bit number from a block entry
 inline static u8 NUM(u8 x, u8 y) { return 3 & block[p][x] >> y; }
 
 // create a new piece, don't remove old one (it has landed and should stick)

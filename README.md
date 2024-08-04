@@ -1,49 +1,50 @@
 # pokemon-diamond-tetris
-## これは何？
-[こちらのブログ記事](https://teponpkmn.hatenablog.com/entry/2023/02/10/003236)で公開したセーブデータを作成するために使用したプログラムのソースコードです。
-ビルドするとポケモンのバイナリデータが生成されます。生成されたバイナリをゲーム内で所定のアドレスに書き込み、NPCASEを使って起動することでテトリスをプレイできます。
+## What is this?
+This is the source code for the program used to create the save data published in [this blog post](https://teponpkmn.hatenablog.com/entry/2023/02/10/003236). Building the program generates binary data for Pokémon. By writing the generated binary to a specified address in the game and launching it using NPCASE, you can play Tetris.
 
-## ビルドの方法
-### 前提条件
-ビルドには Docker, VS Code および Remote Development 拡張機能を利用します。
-### ディレクトリをコンテナ内で開く
-次の手順に従いディレクトリをコンテナ内で開きます。
-1. 本リポジトリをダウンロードまたはクローンし、ディレクトリをVSCodeで開く。
-2. キーボードの [F1] をおしてコマンドパレットを開く。
-3. "Dev Containers: Reopen in Container" を検索して [Enter] を押して実行する。
-### ビルドする
-ビルドをするには次のようにターミナルから`make`コマンドを実行します。
-1. VSCodeのメニューの Terminal > New Terminal からターミナルを開く。
-2. カレントディレクトリ(`/workspaces/pokemon-diamond-tetris`)で `make` コマンドを実行する。
+## How to build
+### Prerequisites
+Building requires Docker, VS Code, and the Remote Development extension.
+### Opening the directory inside the container
+Follow these steps to open the directory inside the container:
+1. Download or clone this repository and open the directory in VSCode.
+2. Press [F1] to open the command palette.
+3. Search for "Dev Containers: Reopen in Container" and press [Enter] to execute.
+### Building
+To build, run the make command from the terminal as follows:
 
-`make`コマンドが終了すると`out` ディレクトリ下に必要なポケモンのデータが生成されています。
+1. Open the terminal from the VSCode menu: Terminal > New Terminal.
+2. Run the make command in the current directory (/workspaces/pokemon-diamond-tetris).
 
-## 出力されたファイルの使い方
-テトリスをプレイするにはゲーム内で以下の２つの作業が必要です。
-- 出力されたファイルを所定の位置に書き込む。
-- NPCのイベントIDを書き換える。
+After the make command finishes, the necessary Pokémon data will be generated under the out directory.
 
-ここからの作業はマサゴタウンのポケモンセンター2Fで行うこととします。
-### 出力されたファイルを所定の位置に書き込む
-`out` ディレクトリ下には　`eggsloader_egg.bin, npcase_egg00.bin, npcase_egg01.bin, tetris_egg00.bin, ..., tetris_egg14.bin` の18個のファイルがあるはずです。各バイナリファイルはボックス内のポケモン1匹分のデータです。このバイナリをASEなりなんなりでパソコンのボックスに書き込みます。配置は以下の通りです。
-|ファイル名|ボックス番号|ボクス内の位置 [^1] |メモリ上のアドレス (from *base address* [^2]) |
-|-|-|-|-|
-|eggsloader_egg.bin|1|1|+0xc318|
-|tetris_egg00.bin|1|2|+0xc3a0|
-|tetris_egg01.bin|1|3|+0xc428|
-|...||
-|tetris_egg14.bin|1|16|+0xcb10|
-|npcase_egg00.bin|18|28|+0x1e060|
-|npcase_egg01.bin|18|29|+0x1e0e8|
+## How to use the output files
+To play Tetris, the following two steps need to be performed in the game:
+- Write the output files to the specified locations.
+- Change the event ID of the NPC.
 
-[^1]: 左上が1,その右隣が2,...,一番右下を30とします。
-[^2]: baseはセーブデータの起点になるアドレスで、ソフトを起動時にランダムに決められる。ダイヤモンド日本語版では0x02108818にその値が格納されている。
+The following steps should be performed on the 2nd floor of the Pokémon Center in Sandgem Town.
+### Writing the output files to the specified locations
+There should be 18 files under the out directory: eggsloader_egg.bin, npcase_egg00.bin, npcase_egg01.bin, tetris_egg00.bin, ..., tetris_egg14.bin. Each binary file corresponds to the data for one Pokémon in the box. Write this binary data to the PC box using ASE or similar tools. The arrangement is as follows:
+| File Name            | Box Number | Position in Box [^1] | Memory Address (from *base address* [^2]) |
+|----------------------|------------|-----------------------|------------------------------------------|
+| eggsloader_egg.bin   | 1          | 1                     | +0xc318                                  |
+| tetris_egg00.bin     | 1          | 2                     | +0xc3a0                                  |
+| tetris_egg01.bin     | 1          | 3                     | +0xc428                                  |
+| ...                  |            |                       |                                          |
+| tetris_egg14.bin     | 1          | 16                    | +0xcb10                                  |
+| npcase_egg00.bin     | 18         | 28                    | +0x1e060                                 |
+| npcase_egg01.bin     | 18         | 29                    | +0x1e0e8                                 |
 
-### NPCのイベントIDを書き換える
-アドレス`base + 0x00024EF4`にはNPCのイベントIDが格納されています。このアドレスの値を`0x973B`に書き換えます。
 
-## テトリスのプレイ方法
-[もとの記事](https://teponpkmn.hatenablog.com/entry/2023/02/10/003236)を御覧ください。
+[^1]: The top left is 1, the next to the right is 2, ..., and the bottom right is 30.
 
-## 対応バージョン
-ADAJN0J08(ダイヤモンド日本語初期版)のみ動作を確認しています。
+[^2]: The base is the starting address of the save data and is determined randomly when the software is launched. For the Japanese version of Diamond, the value is stored at 0x02108818. 
+
+### Changing the event ID of the NPC
+The NPC event ID is stored at address base + 0x00024EF4. Change the value at this address to 0x973B.
+
+How to play Tetris
+Please refer to [The original article](https://teponpkmn.hatenablog.com/entry/2023/02/10/003236).
+## Supported version
+This has been confirmed to work only with ADAJN0J08 (Japanese initial version of Diamond).

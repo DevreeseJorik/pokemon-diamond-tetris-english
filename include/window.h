@@ -1,6 +1,6 @@
 /**
  * @file window.h
- * @brief ウィンドウ描画関連
+ * @brief Window drawing related functions
  *
  */
 
@@ -10,7 +10,7 @@
 #include "acehelper.h"
 #include "string.h"
 
-// 型・定数・マクロ定義
+// Type, Constant, and Macro Definitions
 typedef struct _BGSetting BGSetting;
 typedef struct
 {
@@ -40,20 +40,24 @@ typedef struct
 #define _clearWindowArea ((void (*)(Window *))0x020194f1)
 #define _showWindow ((void (*)(Window *))0x0201955d)
 
-// プロトタイプ宣言
+// Function Prototypes
 static inline Window *newWindow(u32 x, u32 y, u32 width, u32 height);
 static inline void printStr(Window *win, String *str);
 static inline void fillWindow(Window *win, u8 color);
+static inline void hideWindow(Window *win);
+static inline void clearWindowArea(Window *win);
+static inline void showWindow(Window *win);
+static inline void fillWindowArea(Window *win, u8 color, u16 x, u16 y, u16 width, u16 height);
 
 /**
- * @brief ウィンドウを生成する
+ * @brief Create a new window
  *
- * @param x ウィンドウの左上隅のx座標
- * @param y ウィンドウの左上隅のy座標
- * @param width ウィンドウの幅（文字数）
- * @param height ウィンドウの高さ（文字数）
- * @return Window* 生成したウィンドウへのポインタ
- * @details 設定ファイルをfsysから流用しているので、PC画面などでは利用できない
+ * @param x X coordinate of the top-left corner of the window
+ * @param y Y coordinate of the top-left corner of the window
+ * @param width Width of the window (in characters)
+ * @param height Height of the window (in characters)
+ * @return Window* Pointer to the created window
+ * @details Utilizes settings from fsys, so it may not be usable on PC screens.
  */
 inline static Window *newWindow(u32 x, u32 y, u32 width, u32 height)
 {
@@ -64,9 +68,9 @@ inline static Window *newWindow(u32 x, u32 y, u32 width, u32 height)
 }
 
 /**
- * @brief ウィンドウを削除する
+ * @brief Delete a window
  *
- * @param win 削除するウィンドウへのポインタ
+ * @param win Pointer to the window to be deleted
  */
 inline static void deleteWindow(Window *win)
 {
@@ -74,10 +78,10 @@ inline static void deleteWindow(Window *win)
 }
 
 /**
- * @brief ウィンドウに文字列を描画する
+ * @brief Draw a string in the window
  *
- * @param win ウィンドウへのポインタ
- * @param str 文字列へのポインタ
+ * @param win Pointer to the window
+ * @param str Pointer to the string to be drawn
  */
 inline static void printStr(Window *win, String *str)
 {
@@ -85,10 +89,10 @@ inline static void printStr(Window *win, String *str)
 }
 
 /**
- * @brief ウィンドウを単色で塗りつぶす
+ * @brief Fill the window with a single color
  *
- * @param win ウィンドウへのポインタ
- * @param color 色番号。パレット内の番号(0~255)で指定
+ * @param win Pointer to the window
+ * @param color Color index, specified within the palette (0~255)
  */
 inline static void fillWindow(Window *win, u8 color)
 {
@@ -96,9 +100,9 @@ inline static void fillWindow(Window *win, u8 color)
 }
 
 /**
- * @brief ウィンドウを非表示にする
+ * @brief Hide the window
  *
- * @param win 非表示にするウィンドウへのポインタ
+ * @param win Pointer to the window to be hidden
  */
 inline static void hideWindow(Window *win)
 {
@@ -106,9 +110,9 @@ inline static void hideWindow(Window *win)
 }
 
 /**
- * @brief ウィンドウの描画される領域をクリアする
+ * @brief Clear the drawable area of the window
  *
- * @param win クリアするウィンドウへのポインタ
+ * @param win Pointer to the window to be cleared
  */
 inline static void clearWindowArea(Window *win)
 {
@@ -116,9 +120,9 @@ inline static void clearWindowArea(Window *win)
 }
 
 /**
- * @brief ウィンドウを描画する
+ * @brief Show the window
  *
- * @param win 描画するウィンドウへのポインタ
+ * @param win Pointer to the window to be shown
  */
 inline static void showWindow(Window *win)
 {
@@ -126,17 +130,15 @@ inline static void showWindow(Window *win)
 }
 
 /**
- * @brief 指定範囲を塗りつぶす
- *
- * @param   win         BMPデータ
- * @param   col         塗りつぶしカラー
- * @param   px          開始X座標
- * @param   py          開始Y座標
- * @param   sx          Xサイズ
- * @param   sy          Yサイズ
- *
- * @return  none
- */
+ * @brief Fill a specific area of the window with a color
+ *
+ * @param win Pointer to the window
+ * @param color Color index to fill with
+ * @param x Start X coordinate
+ * @param y Start Y coordinate
+ * @param width Width of the area to fill
+ * @param height Height of the area to fill
+ */
 inline static void fillWindowArea(Window *win, u8 col, u16 px, u16 py, u16 sx, u16 sy )
 {
     _fillWindowArea(win, col, px, py, sx, sy);
