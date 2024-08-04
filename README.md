@@ -39,7 +39,7 @@ There should be 18 files under the out directory: eggsloader_egg.bin, npcase_egg
 
 [^1]: The top left is 1, the next to the right is 2, ..., and the bottom right is 30.
 
-[^2]: The base is the starting address of the save data and is determined randomly when the software is launched. For the Japanese version of Diamond, the value is stored at 0x02108818. 
+[^2]: The base is the starting address of the save data and is determined randomly when the software is launched. For the English version of Diamond, the value is stored at 0x02106FC0. 
 
 ### Changing the event ID of the NPC
 The NPC event ID is stored at address base + 0x00024EF4. Change the value at this address to 0x973B.
@@ -47,4 +47,4 @@ The NPC event ID is stored at address base + 0x00024EF4. Change the value at thi
 How to play Tetris
 Please refer to [The original article](https://teponpkmn.hatenablog.com/entry/2023/02/10/003236).
 ## Supported version
-This has been confirmed to work only with ADAJN0J08 (Japanese initial version of Diamond).
+This is a work in progress, targetting all english versions.

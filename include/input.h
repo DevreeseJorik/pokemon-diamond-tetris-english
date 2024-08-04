@@ -7,8 +7,8 @@
 #if !defined(_IPUT_H)
 #define _IPUT_H
 
-#define pad_state (*(u32 *)(0x021c6118 + 0x30))         // Whether a key is pressed
-#define pad_state_keydown (*(u32 *)(0x021c6118 + 0x3c)) // Whether a key was pressed in this frame
+#define pad_state (*(u32 *)(0x021c48B8 + 0x30))         // Whether a key is pressed
+#define pad_state_keydown (*(u32 *)(0x021c48B8 + 0x3c)) // Whether a key was pressed in this frame
 
 
 #define pad_keyA 0x0001

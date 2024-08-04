@@ -17,7 +17,7 @@ all: clean $(BUILDDIR)
 	arm-none-eabi-objcopy -O binary $(BUILDDIR)/$(NAME) $(BUILDDIR)/$(NAME).bin
 	arm-none-eabi-objdump -d $(BUILDDIR)/$(NAME) > $(BUILDDIR)/$(NAME)_dump.txt
 	python3 make_egg.py $(BUILDDIR)/$(NAME).bin $(BUILDDIR)/$(NAME)_egg.bin
-	$(TOOLS)/converter.py -i $(BUILDDIR)/${NAME}_egg.bin -o $(BUILDDIR)/${NAME}_egg_par.txt --pointer -a 0xC318 -p 0x02108818
+	$(TOOLS)/converter.py -i $(BUILDDIR)/${NAME}_egg.bin -o $(BUILDDIR)/${NAME}_egg_par.txt --pointer -a 0xC318 -p 0x02106FC0
 
 $(BUILDDIR):
 	mkdir -p $(BUILDDIR)

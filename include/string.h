@@ -16,8 +16,8 @@ typedef struct
 } String;
 
 #define HEAP_UNUSED 2 // ID for unused heap
-#define _nweString ((String * (*)(u32, u32))0x02023131)
-#define _deleteString ((void (*)(String *))0x02023105)
+#define _createString ((String * (*)(u32, u32))0x020219f5)
+#define _deleteString ((void (*)(String *))0x02021a21)
 
 enum
 {
@@ -58,7 +58,7 @@ static inline String *NumsToStringWithSpace(const u8 nums[], u32 size);
  */
 static inline String *newString(u32 length)
 {
-    return _nweString(length, HEAP_UNUSED);
+    return _createString(length, HEAP_UNUSED);
 }
 
 /**

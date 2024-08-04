@@ -4,8 +4,8 @@
 #include "common.h"
 
 #define pp_jobsys (0x021c6118 + 0x18)
-#define fp_addJob 0x0201c26d
-#define fp_deleteJob 0x0201c1c1
+#define fp_addJob 0x0201b621
+#define fp_deleteJob 0x0201b6a1
 
 typedef struct _Job
 {

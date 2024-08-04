@@ -30,15 +30,15 @@ typedef struct
 #define fsys (*(void **)pp_fsys)
 #define fsysBgl (*(BGSetting **)((u32)fsys + 8))
 
-#define _fillWindowArea ((void (*)(Window*, u8, u16, u16, u16, u16))0x02019051)
-#define _newWindow ((Window * (*)(u32, u32))0x020197c5)
-#define _deleteWindow ((void (*)(Window *, u8))0x020195fd)
-#define _registerWindow ((void (*)(BGSetting *, Window *, u8, u8, u8, u8, u8, u8, u16))0x020196e9)
-#define _fillWindow ((void (*)(Window *, u8))0x02019149)
-#define _printStr ((void (*)(Window *, u32, String *, u32, u32, u32, void *))0x0201ce65)
-#define _hideWindow ((void (*)(Window *))0x02019201)
-#define _clearWindowArea ((void (*)(Window *))0x020194f1)
-#define _showWindow ((void (*)(Window *))0x0201955d)
+#define _fillWindowArea ((void (*)(Window*, u8, u16, u16, u16, u16))0x020196f5)
+#define _newWindow ((Window * (*)(u32, u32))0x02018ff5) // unsure 201901c
+#define _deleteWindow ((void (*)(Window *, u8))0x02019179)
+#define _registerWindow ((void (*)(BGSetting *, Window *, u8, u8, u8, u8, u8, u8, u16))0x02019065)
+#define _fillWindow ((void (*)(Window *, u8))0x02019621)
+#define _printStr ((void (*)(Window *, u32, String *, u32, u32, u32, void *))0x0201bd85)
+#define _hideWindow ((void (*)(Window *))0x02019570) // unsure
+#define _clearWindowArea ((void (*)(Window *))0x0201928d) // unsure
+#define _showWindow ((void (*)(Window *))0x020191d1)
 
 // Function Prototypes
 static inline Window *newWindow(u32 x, u32 y, u32 width, u32 height);

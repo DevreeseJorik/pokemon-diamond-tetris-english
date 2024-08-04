@@ -19,23 +19,23 @@ typedef struct
     u8 abcd[0x80];
 } BoxPokemon;
 
-#define p_base ((u32 *)0x02108818)
-#define pp_fsys 0x021c7270
-#define p_sys 0x021c6118
+#define p_base ((u32 *)0x02106FC0)
+#define pp_fsys 0x021c5A08
+#define p_sys 0x021c48B8
 
 #define pause_flag (*((u32 *)(p_base + 0x22AAC)))   // Disable operations in the field
 
-#define fp_malloc 0x02017099
-#define fp_free 0x02016fdd
-#define fp_gf_rand 0x0201c909
-#define fp_decrypt 0x0206ee7d
-#define fp_encrypt 0x0206eea5
-#define fp_loadOverlay 0x0200635d
-#define fp_unloadOverlay 0x02006471
-#define fp_DC_StoreAll 0x020ce510
-#define fp_IC_InvalidateAll 0x020ce5d8
-#define fp_memcpy 0x020e17b0
-#define fp___fill_mem 0x020e17d0
+#define fp_malloc 0x02016999
+#define fp_free 0x02016a19
+#define fp_gf_rand 0x0201B9E1
+#define fp_decrypt 0x02066a6d
+#define fp_encrypt 0x02066a21
+#define fp_loadOverlay 0x02005fdd
+#define fp_unloadOverlay 0x02005f3d
+#define fp_DC_StoreAll 0x020cc0c5
+#define fp_IC_InvalidateAll 0x020cc18d
+#define fp_memcpy 0x020df510
+#define fp___fill_mem 0x020df551
 
 #define HEAP_UNUSED 2
 

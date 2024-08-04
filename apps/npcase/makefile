@@ -31,7 +31,7 @@ $(BUILDDIR)/$(BIN):
 
 egg: $(BUILDDIR)/$(BIN)
 	python3 make_egg.py $(BUILDDIR)/$(BIN) $(BUILDDIR)/$(NAME)
-	python3 ${TOOLS}/converter.py -i $(BUILDDIR)/${NAME}_eggs.bin -o $(BUILDDIR)/${NAME}_eggs_par.txt --pointer -a 0x1E060 -p 0x02108818
+	python3 ${TOOLS}/converter.py -i $(BUILDDIR)/${NAME}_eggs.bin -o $(BUILDDIR)/${NAME}_eggs_par.txt --pointer -a 0x1E060 -p 0x02106FC0
 
 clean:
 	rm -rf $(BUILDDIR)/*
